@@ -1,17 +1,19 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
-import { actionCreator } from "../store";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo } from "../store";
 import ToDo from "../components/ToDo";
 
-function Home({ toDos, addToDo }) {
-  //mapStateToProps으로부터 전달받은 props
+function Home() {
   const [text, setText] = useState("");
+  const toDo = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   const onChange = (e) => {
     setText(e.target.value);
   };
   const onSubmit = (e) => {
     e.preventDefault();
-    addToDo(text);
+    dispatch(addTodo(text));
     setText("");
   };
   return (
@@ -27,21 +29,12 @@ function Home({ toDos, addToDo }) {
         <button>추가</button>
       </form>
       <ul>
-        {toDos.map((toDo) => (
-          <ToDo key={toDo.id} {...toDo} />
+        {toDo.map((to) => (
+          <ToDo key={to.id} {...to} />
         ))}
       </ul>
     </>
   );
 }
-function mapStateToProps(state) {
-  // store에서 state를 받아온다
-  return { toDos: state };
-} // redux state로부터 home(component)에 prop으로써 전달한다는 의미
-function mapDispatchToProps(dispatch) {
-  return {
-    addToDo: (text) => dispatch(actionCreator.addToDo(text)),
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(Home); // connect()는 home으로 보내주는 props에 추가될 수 있도록 허용해줌
-//무엇을 return 한다 해도 component의 prop에 추가될 것이다
+
+export default Home;

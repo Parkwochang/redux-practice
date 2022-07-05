@@ -3,11 +3,11 @@ import { legacy_createStore } from "redux";
 const ADD = "ADD";
 const DELETE = "DELETE";
 
-export const addToDo = (text) => {
+export const addTodo = (text) => {
   return { type: ADD, text, id: Date.now() };
 };
 
-const deleteToDo = (id) => {
+export const deleteTodo = (id) => {
   return { type: DELETE, id };
 };
 
@@ -25,8 +25,8 @@ const reducer = (state = [], action) => {
 const store = legacy_createStore(reducer);
 
 export const actionCreator = {
-  addToDo,
-  deleteToDo,
+  addTodo,
+  deleteTodo,
 };
 
 export default store;

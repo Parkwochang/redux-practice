@@ -1,20 +1,22 @@
 import React from "react";
-import { connect } from "react-redux";
-import { actionCreator } from "../store";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { deleteTodo } from "../store";
 
-function ToDo({ text, onBtnClick }) {
+function ToDo({ text, id }) {
+  // 받아온 state 정보에서 text, id만 잘라서 받는다
+  const dispatch = useDispatch();
+
+  const onClick = () => {
+    dispatch(deleteTodo(id));
+  };
+
   return (
     <li>
-      {text} <button onClick={onBtnClick}>삭제</button>
+      <Link to={`${id}`}>{text}</Link>
+      <button onClick={onClick}>삭제</button>
     </li>
   );
 }
 
-function mapDispatchToProps(dispatch, ownProps) {
-  //여기서는 ownprops가 중요하다
-  return {
-    onBtnClick: () => dispatch(actionCreator.deleteToDo(ownProps.id)),
-  };
-}
-
-export default connect(null, mapDispatchToProps)(ToDo);
+export default ToDo;
