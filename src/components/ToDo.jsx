@@ -1,14 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { deleteTodo } from "../store";
+import { remove } from "../store";
 
 function ToDo({ text, id }) {
   // 받아온 state 정보에서 text, id만 잘라서 받는다
   const dispatch = useDispatch();
 
   const onClick = () => {
-    dispatch(deleteTodo(id));
+    dispatch(remove(id));
   };
 
   return (
