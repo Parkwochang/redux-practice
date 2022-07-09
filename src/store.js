@@ -32,7 +32,7 @@ import {
 
 const toDos = createSlice({
   name: "toDosReducer",
-  initialState: [],
+  initialState: [], //초기화
   reducers: {
     add: (state, action) => {
       state.push({ text: action.payload, id: Date.now() });
@@ -41,10 +41,11 @@ const toDos = createSlice({
       state.filter((toDo) => toDo.id !== action.payload),
   },
 });
-
-console.log(toDos.reducer);
+//reducer 함수와 action creator를 포함한 객체이다
+//즉 이를 사용하면 초기 값과 action creator와 reducer가 한번에 생성된다
 
 const store = configureStore({ reducer: toDos.reducer }); //default to the store
+//reducer에서 반환된 새로운 state를 store라는 객체로 저장해 관리하는 곳
 
 export const { add, remove } = toDos.actions;
 
