@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 function Detail() {
   const params = useParams().id;
-  const todos = useSelector((state) => state);
+  const todos = useSelector((state) => state); //store의 state값을 가져온다
   const text = todos.find((todo) => todo.id === parseInt(params));
 
   return (

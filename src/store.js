@@ -30,7 +30,7 @@ import {
 //     state.filter((toDo) => toDo.id !== action.payload), //새로운 state objsct를 리턴해야 한다
 // });
 
-const toDos = createSlice({
+const toDos = createSlice({ //createaction을 통해 따로 액션타입을 정의하지 않아도 자동으로 액션타입을 만들어 준다
   name: "toDosReducer",
   initialState: [], //초기화
   reducers: {
